@@ -20,7 +20,6 @@ install_hdf5() {
   make install
   popd
   popd
-
 }
 
 git_config() {
@@ -28,12 +27,11 @@ git_config() {
   git config --global user.name "Travis CI"
 }
 
-commit_tar() {
-  git checkout -b v$HDF5_VERSION
-  if [ -f build.tar.gz ]; then rm build.tar.gz; fi
+create_tar() {
+  mkdir /tmp/build
+  pushd /tmp/build
+
   tar -zcvf build.tar.gz $HDF5_DIR
-  git add build.tar.gz
-  git commit --message "Travis build: $TRAVIS_BUILD_NUMBER [ci skip]"
 }
 
 git_push() {
@@ -41,6 +39,13 @@ git_push() {
     echo "Error: variable GITHUB_PAT not found."
     exit 1
   fi
-  git remote add origin-pages https://${GITHUB_PAT}@github.com/dynverse/travis_hdf5.git > /dev/null 2>&1
-  git push --quiet --set-upstream origin-pages v$HDF5_VERSION
+
+  git init
+
+  git add build.tar.gz
+  git commit --allow-empty -m "Travis build: $TRAVIS_BUILD_NUMBER [ci skip]"
+
+  git remote add origin https://${GITHUB_PAT}@github.com/dynverse/travis_hdf5.git
+  git push --force origin v$HDF5_VERSION
+  popd
 }
