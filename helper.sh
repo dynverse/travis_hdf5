@@ -33,7 +33,7 @@ commit_tar() {
   if [ -f build.tar.gz ]; then rm build.tar.gz; fi
   tar -zcvf build.tar.gz $HDF5_DIR
   git add build.tar.gz
-  git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
+  git commit --message "Travis build: $TRAVIS_BUILD_NUMBER [ci skip]"
 }
 
 git_push() {
