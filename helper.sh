@@ -39,6 +39,7 @@ upload_tar() {
   tar -zcvf build.tar.gz *
 
   git init
+  git checkout --orphan v$HDF5_VERSION
 
   git add build.tar.gz
   git commit --allow-empty -m "Travis build: $TRAVIS_BUILD_NUMBER [ci skip]"
