@@ -11,8 +11,6 @@ before_install:
 - export HDF5_DIR=$HOME/.cache/hdf5
 install:
 - install_hdf5
-script:
-- echo no script
 after_success:
 - git_config
 - commit_tar
