@@ -27,18 +27,16 @@ git_config() {
   git config --global user.name "Travis CI"
 }
 
-create_tar() {
-  mkdir /tmp/build
-  pushd /tmp/build
 
-  tar -zcvf build.tar.gz $HDF5_DIR
-}
-
-git_push() {
+upload_tar() {
   if [ -z "$GITHUB_PAT" ]; then
     echo "Error: variable GITHUB_PAT not found."
     exit 1
   fi
+
+  pushd $HDF5_DIR
+
+  tar -zcvf build.tar.gz *
 
   git init
 

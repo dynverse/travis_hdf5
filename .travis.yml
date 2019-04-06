@@ -11,5 +11,4 @@ install:
 - export HDF5_DIR=$HOME/.cache/hdf5
 - install_hdf5
 - git_config
-- commit_tar
-- git_push
+- upload_tar
