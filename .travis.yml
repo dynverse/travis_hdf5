@@ -6,12 +6,10 @@ env:
 - HDF5_VERSION=1.8.21
 - HDF5_VERSION=1.10.1
 - HDF5_VERSION=1.10.5
-before_install:
+install:
 - source helper.sh
 - export HDF5_DIR=$HOME/.cache/hdf5
-install:
 - install_hdf5
-after_success:
 - git_config
 - commit_tar
 - git_push
