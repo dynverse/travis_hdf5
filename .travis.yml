@@ -1,0 +1,24 @@
+language: r
+dist: trusty
+sudo: true
+os:
+- linux
+services:
+- docker
+env:
+- HDF5_VERSION=1.8.14
+- HDF5_VERSION=1.8.21
+- HDF5_VERSION=1.10.1
+- HDF5_VERSION=1.10.5
+before_install:
+- source helper.sh
+- export HDF5_DIR=$HOME/.cache/hdf5
+install:
+- set -e
+- install_hdf5
+script:
+- echo no script
+after_success:
+- git_config
+- commit_tar
+- git_push
